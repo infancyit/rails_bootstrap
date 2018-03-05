@@ -1,0 +1,38 @@
+<div class="jumbotron">
+  <h3 class="display-4 text-center"><b>List of Data</b></h3>
+  <p class="lead">
+
+
+  <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>Option</th>
+      </tr>
+      </thead>
+
+      <% @person.each do |person| %>
+        <tr>
+          <td><%=  person.first_name %></td>
+          <td><%=  person.last_name %></td>
+          <td><%=  person.email %></td>
+          <td><%=  person.country_field %></td>
+          <td><%=  person.state_field %></td>
+          <td>
+            <%= link_to 'Edit', edit_person_path(person.id) %>
+            <%= link_to 'Delete', person, :method => 'delete' %>
+          </td>
+        </tr>
+      <% end -%>
+    </table>
+
+    <br>
+    <p><%= link_to 'New', new_person_path,  class: "btn btn-success"%></p>
+
+  </p>
+</div>
+
