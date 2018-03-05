@@ -18,3 +18,4 @@
 //= require country_state_select
 //= require chosen-prototype
 //= require tether
+//= require rails.validations

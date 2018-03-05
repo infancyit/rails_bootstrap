@@ -44,7 +44,7 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
-    if @person.email == @person.email_confirm
+    if person_params['email'] == person_params['email_confirm']
       if @person.update_attributes(person_params)
         flash.now[:notice] = "Successfully Updated"
         redirect_to :action => 'show', :id => @person.id
@@ -56,7 +56,6 @@ class PeopleController < ApplicationController
       flash.now[:danger] = "Email not matched"
       render :action => :edit
     end
-
   end
 
 
@@ -70,8 +69,7 @@ class PeopleController < ApplicationController
 
   def proceed
     @person = Person.find(params[:id])
-     @message = UserMailer.welcome_email(@person)
-     if @message.deliver
+     if UserMailer.welcome_email(@person).deliver_later
        flash.now[:notice] = "Congrats, Mail sent successfully!!"
        render 'message'
      else
