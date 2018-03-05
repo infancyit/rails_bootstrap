@@ -9,19 +9,25 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(person_params)
-     if @person.save
-    #   #redirect_to '/people'
-       flash.now[:notice] = "Successfully Created and Waiting for Next Action"
-       redirect_to :action => 'show', :id => @person.id
-     else
-       flash.now[:danger] = "Something Went Wrong"
-       render :action => 'new'
-     end
+    # render :json => @person
+    if @person.email == @person.email_confirm
+      #render :json => @person
+      if @person.save
+        flash.now[:notice] = "Successfully Created and Waiting for Next Action"
+        redirect_to :action => 'show', :id => @person.id
+      else
+        flash.now[:danger] = "Something Went Wrong"
+        render :action => 'new'
+      end
+    else
+      flash.now[:danger] = "Email not matched"
+      render :action => :new
+    end
   end
 
 
   def person_params
-    params.require(:person).permit(:first_name, :last_name, :email, :country_id, :state_id)
+    params.require(:person).permit(:first_name, :last_name, :email, :country_id, :state_id, :email_confirm)
   end
 
 
@@ -34,15 +40,23 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
   end
 
+
+
   def update
     @person = Person.find(params[:id])
-    if @person.update_attributes(person_params)
-      flash.now[:notice] = "Successfully Updated"
-      redirect_to :action => 'show', :id => @person.id
+    if @person.email == @person.email_confirm
+      if @person.update_attributes(person_params)
+        flash.now[:notice] = "Successfully Updated"
+        redirect_to :action => 'show', :id => @person.id
+      else
+        flash.now[:danger] = "Something Went Wrong"
+        render :action => :edit
+      end
     else
-      flash.now[:danger] = "Something Went Wrong"
+      flash.now[:danger] = "Email not matched"
       render :action => :edit
     end
+
   end
 
 
@@ -50,7 +64,7 @@ class PeopleController < ApplicationController
     @person = Person.find params[:id]
     @person.destroy
     flash.now[:notice] = "Successfully Deleted"
-    redirect_to people_path
+    render :action => :index
   end
 
 
@@ -58,7 +72,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
      @message = UserMailer.welcome_email(@person)
      if @message.deliver
-       flash.now[:notice] = "Congrats, Mail send successfully!!"
+       flash.now[:notice] = "Congrats, Mail sent successfully!!"
        render 'message'
      else
        flash.now[:danger] = "Something Went Wrong!"

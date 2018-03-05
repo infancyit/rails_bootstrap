@@ -27,7 +27,7 @@
           <td><%=  person.country.name %></td>
           <td><%=  person.state.name %></td>
           <td>
-            <%= link_to 'Edit', edit_person_path(person.id) %>
+            <%= link_to 'Show', person_path(person.id) %>
             <%= link_to 'Delete', person, :method => 'delete' %>
           </td>
         </tr>

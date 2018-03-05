@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20190304220400) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "email_confirm"
     t.integer "country_id"
     t.integer "state_id"
     t.datetime "created_at", null: false
