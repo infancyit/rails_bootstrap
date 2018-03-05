@@ -11,12 +11,9 @@ class PeopleController < ApplicationController
     @person = Person.new(person_params)
      if @person.save
     #   #redirect_to '/people'
-    #   redirect_to :action => 'show', :id => @person.id
-    # else
-    #   render :action => 'new'
-       render :json => @person
+       redirect_to :action => 'show', :id => @person.id
      else
-       render :json => 'problem'
+      render :action => 'new'
      end
   end
 

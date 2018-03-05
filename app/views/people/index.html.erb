@@ -20,8 +20,8 @@
           <td><%=  person.first_name %></td>
           <td><%=  person.last_name %></td>
           <td><%=  person.email %></td>
-          <td><%=  person.country_field %></td>
-          <td><%=  person.state_field %></td>
+          <td><%=  person.country.name %></td>
+          <td><%=  person.state.name %></td>
           <td>
             <%= link_to 'Edit', edit_person_path(person.id) %>
             <%= link_to 'Delete', person, :method => 'delete' %>
