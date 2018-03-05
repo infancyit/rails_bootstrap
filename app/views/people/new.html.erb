@@ -1,28 +1,38 @@
 <div class="jumbotron">
-  <h3 class="display-3 text-center"><b>Welcome to Rails</b></h3>
+  <div class="card">
+    <div class="card-header">
+     <h2 class="text-center"> Welcome to Rails </h2>
+    </div>
+  </div>
   <p class="lead">
 
       <%= simple_form_for @person,  :html => {class: 'subscribe-from'}  do |form| %>
         <div class="form-group">
             <label for="formGroupExampleInput">First Name</label>
-            <%= form.text_field :first_name , class: "form-control", placeholder: "First Name"%>
+            <%= form.text_field :first_name , class: "form-control", placeholder: "First Name" %>
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Last Name</label>
-            <%= form.text_field :last_name , class: "form-control", placeholder: "Last Name"%>
+            <%= form.text_field :last_name , class: "form-control", placeholder: "Last Name" %>
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput3">Email</label>
             <%= form.email_field :email , class: "form-control", placeholder: "Email"%>
           </div>
-          <div class="form-group">
-            <label for="formGroupExampleInput5">Country</label>
-            <%= form.collection_select :country_id, Country.order(:name), :id, :name, include_blank: true  %>
+
+
+          <div class="form-group row">
+            <div class="col">
+              <label for="formGroupExampleInput4">Country</label><br>
+              <%= form.collection_select :country_id, Country.order(:name), :id, :name, class: "form-control",class: "custom-select mr-sm-2", include_blank: true  %>
+            </div>
+            <div class="col">
+              <label for="formGroupExampleInput5">State</label><br>
+              <%= form.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, class: "form-control", include_blank: true %>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="formGroupExampleInput6">City</label>
-            <%= form.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, include_blank: true %>
-          </div>
+
+
           <div class="col-md-12 col-md-offset-3">
             <%= form.submit "Submit", class: "btn btn-success btn-block" %>
         </div>
@@ -31,4 +41,13 @@
 </div>
 
 
-
+<style>
+  select#person_country_id {
+    height: 34px;
+    width: 100%; !important;
+  }
+  select#person_state_id {
+    height: 34px;
+    width: 100%; !important;
+  }
+</style>

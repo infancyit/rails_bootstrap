@@ -11,9 +11,11 @@ class PeopleController < ApplicationController
     @person = Person.new(person_params)
      if @person.save
     #   #redirect_to '/people'
+       flash.now[:notice] = "Successfully Created and Waiting for Next Action"
        redirect_to :action => 'show', :id => @person.id
      else
-      render :action => 'new'
+       flash.now[:error] = "Something Went Wrong"
+       render :action => 'new'
      end
   end
 
@@ -34,10 +36,11 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
-    if
-      @person.update_attributes(person_params)
+    if @person.update_attributes(person_params)
+      flash.now[:notice] = "Successfully Updated"
       redirect_to :action => 'show', :id => @person.id
     else
+      flash.now[:error] = "Something Went Wrong"
       render :action => :edit
     end
   end
@@ -46,16 +49,24 @@ class PeopleController < ApplicationController
   def destroy
     @person = Person.find params[:id]
     @person.destroy
+    flash.now[:success] = "Successfully Deleted"
     redirect_to people_path
   end
 
 
   def proceed
     @person = Person.find(params[:id])
-    UserMailer.welcome_email(@person).deliver
-    #render :json => @person.email
-    redirect_to :action => 'show', :id => @person.id
+     @message = UserMailer.welcome_email(@person)
+     if @message.deliver
+       flash.now[:notice] = "Mail Sent to User"
+       render 'message'
+     else
+       flash.now[:alert] = "Something Went Wrong"
+       render 'message'
+     end
   end
+
+
 
 
 end

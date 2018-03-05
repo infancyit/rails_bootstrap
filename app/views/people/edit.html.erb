@@ -1,7 +1,7 @@
-<div class="jumbotron">
-  <h3 class="display-3 text-center"><b>Welcome to Rails</b></h3>
-  <p class="lead">
 
+<div class="jumbotron">
+  <h3 class="display-1 text-center"><b>Welcome to Rails</b></h3>
+  <p class="lead">
     <%= simple_form_for @person,  :html => {class: 'subscribe-from'}  do |form| %>
     <div class="form-group">
       <label for="formGroupExampleInput">First Name</label>
@@ -24,7 +24,7 @@
       <%= form.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, include_blank: true %>
     </div>
     <div class="col-md-12 col-md-offset-3">
-      <%= form.submit "Proceed", class: "btn btn-success btn-block" %>
+      <%= form.submit "Update Information", class: "btn btn-success btn-block" %>
     </div>
   <%end%>
 
@@ -32,3 +32,13 @@
   </p>
 </div>
 
+<style>
+  select#person_country_id {
+    height: 34px;
+    width: 100%; !important;
+  }
+  select#person_state_id {
+    height: 34px;
+    width: 100%; !important;
+  }
+</style>
