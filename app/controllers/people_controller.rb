@@ -14,7 +14,7 @@ class PeopleController < ApplicationController
        flash.now[:notice] = "Successfully Created and Waiting for Next Action"
        redirect_to :action => 'show', :id => @person.id
      else
-       flash.now[:error] = "Something Went Wrong"
+       flash.now[:danger] = "Something Went Wrong"
        render :action => 'new'
      end
   end
@@ -40,7 +40,7 @@ class PeopleController < ApplicationController
       flash.now[:notice] = "Successfully Updated"
       redirect_to :action => 'show', :id => @person.id
     else
-      flash.now[:error] = "Something Went Wrong"
+      flash.now[:danger] = "Something Went Wrong"
       render :action => :edit
     end
   end
@@ -49,7 +49,7 @@ class PeopleController < ApplicationController
   def destroy
     @person = Person.find params[:id]
     @person.destroy
-    flash.now[:success] = "Successfully Deleted"
+    flash.now[:notice] = "Successfully Deleted"
     redirect_to people_path
   end
 
@@ -58,10 +58,10 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
      @message = UserMailer.welcome_email(@person)
      if @message.deliver
-       flash.now[:notice] = "Mail Sent to User"
+       flash.now[:notice] = "Congrats, Mail send successfully!!"
        render 'message'
      else
-       flash.now[:alert] = "Something Went Wrong"
+       flash.now[:danger] = "Something Went Wrong!"
        render 'message'
      end
   end
