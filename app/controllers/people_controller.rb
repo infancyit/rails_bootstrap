@@ -60,10 +60,10 @@ class PeopleController < ApplicationController
 
 
   def destroy
-    @person = Person.find params[:id]
-    @person.destroy
-    flash.now[:notice] = "Successfully Deleted"
-    render :action => :index
+    if Person.destroy(params[:id])
+      flash.now[:notice] = "Successfully Deleted"
+      render :action =>  :index
+    end
   end
 
 

@@ -2,7 +2,6 @@
 jQuery(function() {
     var states;
     states = $('#person_state_id').html();
-    console.log(states);
     return $('#person_country_id').change(function() {
         var country, options;
         country = $('#person_country_id :selected').text();

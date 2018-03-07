@@ -14,7 +14,7 @@
         <th>Last Name</th>
         <th>Email</th>
         <th>Country</th>
-        <th>State</th>
+        <th>City</th>
         <th>Option</th>
       </tr>
       </thead>
@@ -28,7 +28,6 @@
           <td><%=  person.state.name %></td>
           <td>
             <%= link_to 'Show', person_path(person.id) %>
-            <%= link_to 'Delete', person, :method => 'delete' %>
           </td>
         </tr>
       <% end -%>

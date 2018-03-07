@@ -12,6 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20190304220400) do
 
+  create_table "cities", force: :cascade do |t|
+    t.integer "state_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -25,6 +32,7 @@ ActiveRecord::Schema.define(version: 20190304220400) do
     t.string "email_confirm"
     t.integer "country_id"
     t.integer "state_id"
+    t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

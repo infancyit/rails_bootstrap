@@ -30,7 +30,7 @@
               <%= form.collection_select :country_id, Country.order(:name), :id, :name, class: "form-control",class: "custom-select mr-sm-2", include_blank: true  %>
             </div>
             <div class="col">
-              <label for="formGroupExampleInput5">State</label><br>
+              <label for="formGroupExampleInput5">City</label><br>
               <%= form.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, class: "form-control", include_blank: true %>
             </div>
           </div>
